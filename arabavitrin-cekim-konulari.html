@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArabaVitrin — Çekim Konuları</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B2D5B;
+  --navy-deep:#101d3d;
+  --coral:#D4431A;
+  --coral-soft:#f0e3dc;
+  --green:#1f9d6b;
+  --green-soft:#e1efe9;
+  --paper:#f6f5f2;
+  --card:#ffffff;
+  --line:#e4e2dd;
+  --ink:#1B2D5B;
+  --muted:#6b7280;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:560px;margin:0 auto;padding:0 18px 80px;}
+
+/* HEADER */
+header{
+  background:var(--navy);
+  color:#fff;
+  margin:0 -18px;
+  padding:42px 26px 34px;
+  position:relative;
+  overflow:hidden;
+}
+header::after{
+  content:"";
+  position:absolute;
+  right:-40px;top:-40px;
+  width:170px;height:170px;
+  border:14px solid var(--coral);
+  border-radius:50%;
+  opacity:.18;
+}
+.brand{
+  font-family:'Archivo',sans-serif;
+  font-weight:800;
+  font-size:13px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--coral);
+  margin-bottom:14px;
+}
+header h1{
+  font-family:'Archivo',sans-serif;
+  font-weight:800;
+  font-size:34px;
+  line-height:1.05;
+  letter-spacing:-.01em;
+}
+header p{
+  margin-top:14px;
+  font-size:15px;
+  color:#c7cfe2;
+  max-width:34ch;
+}
+.stat-row{
+  display:flex;
+  gap:10px;
+  margin-top:24px;
+}
+.stat{
+  flex:1;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  padding:12px 10px;
+}
+.stat b{
+  font-family:'Archivo',sans-serif;
+  font-size:26px;
+  display:block;
+  line-height:1;
+}
+.stat span{
+  font-size:11px;
+  color:#aab4cf;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+/* TABS */
+.tabs{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  gap:7px;
+  background:var(--paper);
+  padding:14px 0 12px;
+  margin:0 0 6px;
+}
+.tab{
+  flex:1;
+  border:none;
+  font-family:'Archivo',sans-serif;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:.01em;
+  padding:13px 6px;
+  border-radius:12px;
+  background:#fff;
+  color:var(--navy);
+  border:1.5px solid var(--line);
+  cursor:pointer;
+  transition:.18s;
+  white-space:nowrap;
+}
+.tab.active{
+  background:var(--navy);
+  color:#fff;
+  border-color:var(--navy);
+}
+.tab .dot{
+  display:inline-block;
+  width:7px;height:7px;
+  border-radius:50%;
+  margin-right:6px;
+  vertical-align:middle;
+}
+.tab[data-t="sicak"] .dot{background:var(--coral);}
+.tab[data-t="soguk"] .dot{background:#7b95c9;}
+.tab[data-t="kamera"] .dot{background:var(--green);}
+
+/* SECTION LABEL */
+.sec-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:20px 2px 14px;
+}
+.sec-label .bar{
+  width:30px;height:3px;border-radius:3px;
+}
+.sec-label.soguk .bar{background:#7b95c9;}
+.sec-label.sicak .bar{background:var(--coral);}
+.sec-label.kamera .bar{background:var(--green);}
+.sec-label h2{
+  font-family:'Archivo',sans-serif;
+  font-size:15px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.sec-label small{color:var(--muted);font-size:12px;font-weight:500;margin-left:auto;}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  margin-bottom:12px;
+  overflow:hidden;
+  transition:.18s;
+}
+.card.open{box-shadow:0 8px 26px -14px rgba(27,45,91,.4);}
+.card-head{
+  display:flex;
+  align-items:flex-start;
+  gap:13px;
+  padding:16px 16px;
+  cursor:pointer;
+}
+.num{
+  flex-shrink:0;
+  font-family:'Archivo',sans-serif;
+  font-weight:800;
+  font-size:13px;
+  width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:10px;
+  background:var(--navy);
+  color:#fff;
+  letter-spacing:.02em;
+}
+.card.sicak .num{background:var(--coral);}
+.card.kamera .num{background:var(--green);}
+.head-text{flex:1;min-width:0;}
+.card-title{
+  font-family:'Archivo',sans-serif;
+  font-weight:700;
+  font-size:16.5px;
+  line-height:1.22;
+  color:var(--navy);
+}
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:9px;
+}
+.chip{
+  font-size:11px;
+  font-weight:600;
+  padding:4px 9px;
+  border-radius:20px;
+  background:#eef1f7;
+  color:var(--navy);
+  letter-spacing:.01em;
+}
+.chip.time{
+  background:var(--coral-soft);
+  color:var(--coral);
+}
+.chev{
+  flex-shrink:0;
+  width:22px;height:22px;
+  margin-top:8px;
+  color:var(--muted);
+  transition:transform .25s;
+}
+.card.open .chev{transform:rotate(180deg);}
+
+.body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .32s ease;
+}
+.body-inner{
+  padding:2px 16px 18px 67px;
+}
+.body-inner .lead{
+  font-size:13.5px;
+  font-style:italic;
+  color:var(--coral);
+  margin-bottom:12px;
+  padding-left:11px;
+  border-left:2.5px solid var(--coral);
+}
+.card.kamera .body-inner .lead{color:var(--green);border-left-color:var(--green);}
+.body-inner ul{list-style:none;}
+.body-inner li{
+  position:relative;
+  font-size:14px;
+  color:#374151;
+  padding:0 0 11px 18px;
+  line-height:1.55;
+}
+.body-inner li::before{
+  content:"";
+  position:absolute;
+  left:0;top:8px;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--navy);
+}
+.card.sicak .body-inner li::before{background:var(--coral);}
+
+/* WHY (niye işe yarar) */
+.why{
+  margin-top:13px;
+  padding-top:11px;
+  border-top:1px dashed var(--line);
+  font-size:12.5px;
+  color:var(--muted);
+  line-height:1.5;
+}
+.why b{
+  display:block;
+  font-family:'Archivo',sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--navy);
+  margin-bottom:4px;
+}
+
+/* NOTE (üretim uyarısı) */
+.note{
+  margin-top:12px;
+  font-size:12.5px;
+  background:#fff7ed;
+  border:1px solid #fcd9b8;
+  color:#9a3412;
+  padding:9px 12px;
+  border-radius:10px;
+  font-weight:500;
+}
+
+/* TALKING HEAD SEGMENTS */
+.seg{margin-bottom:13px;}
+.seg:last-of-type{margin-bottom:0;}
+.seg-label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:'Archivo',sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:6px;
+}
+.seg-label .time{
+  font-weight:600;
+  letter-spacing:.02em;
+  color:var(--green);
+  text-transform:none;
+}
+.seg .box{
+  font-size:14px;
+  line-height:1.58;
+  color:#374151;
+  padding:11px 13px;
+  background:#f7f8fa;
+  border-left:3px solid var(--line);
+  border-radius:10px;
+}
+.seg .box p{margin-bottom:8px;}
+.seg .box p:last-child{margin-bottom:0;}
+.seg.hook .box{
+  background:var(--green-soft);
+  border-left-color:var(--green);
+  color:#155e44;
+  font-weight:500;
+}
+.seg.close .box{
+  background:#eef1f7;
+  border-left-color:var(--navy);
+  color:var(--navy);
+  font-weight:500;
+}
+
+.group{display:none;}
+.group.active{display:block;}
+
+footer{
+  text-align:center;
+  margin-top:36px;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:12px;
+}
+footer b{color:var(--navy);font-family:'Archivo';letter-spacing:.04em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">ArabaVitrin</div>
+    <h1>Çekeceğimiz<br>Konular</h1>
+    <p>Osmo Pocket / iPhone ile çekim. Operasyon, fark ve doğrudan kamera anlatımı — her video tam transkriptiyle.</p>
+    <div class="stat-row">
+      <div class="stat"><b>40</b><span>Video</span></div>
+      <div class="stat"><b>20</b><span>Operasyon</span></div>
+      <div class="stat"><b>20</b><span>Kamera</span></div>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" data-t="soguk"><span class="dot"></span>Soğuk</button>
+    <button class="tab" data-t="sicak"><span class="dot"></span>Sıcak</button>
+    <button class="tab" data-t="kamera"><span class="dot"></span>Kamera</button>
+  </div>
+
+  <!-- SOGUK -->
+  <div class="group active" id="g-soguk">
+    <div class="sec-label soguk">
+      <span class="bar"></span>
+      <h2>Operasyon Showcase</h2>
+      <small>Fark gösterimi · Soğuk</small>
+    </div>
+
+    <!-- S1 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S1</div>
+        <div class="head-text">
+          <div class="card-title">Müşteri ofise gelmeden ne yapıyorum?</div>
+          <div class="meta"><span class="chip">Behind-the-scenes</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"1 saat sonra müşterim geliyor. O gelmeden ne yapıyorum, bak."</div>
+        <ul>
+          <li>Sabah ofise giriyor, kahve hazırlıyor. "1 saat sonra müşterim geliyor. O gelmeden ne yapıyorum, bak."</li>
+          <li>Bilgisayara oturuyor. Sahibinden açıyor, müşterinin aracı gibi 20 ilan inceliyor. "Bu hazırlık olmadan müşteriye 'fiyat şu' diyemem. Galericinin sallaması bu — kafadan rakam söylüyor."</li>
+          <li>Notlar yazıyor. "Ortalama 1 milyon 240. Pazarlık marjı 30 bin. Sözleşmede yazacak fiyat 1 milyon 270."</li>
+          <li>Mehmet Bey hakkında küçük not. "Form bilgilerine bakıyorum — ailesiyle Antalya'ya yeni taşınmış, eski araba elinde kalmış. Yumuşak yaklaşacağım, baskı yapmam."</li>
+          <li>Kapanış: "Hazırlanmamış müşteri görüşmesi karambol olur. Biz öyle çalışmıyoruz."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Profesyonellik gösterimi. Galericiden farkı somut.</div>
+      </div></div>
+    </article>
+
+    <!-- S2 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S2</div>
+        <div class="head-text">
+          <div class="card-title">Sözleşmemizi gösteriyorum — neyi imzalıyorsun?</div>
+          <div class="meta"><span class="chip">Document walkthrough</span><span class="chip time">70 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Hep soruyorlar — 'sözleşme ne diyor?' Anlatayım, açıkça."</div>
+        <ul>
+          <li>Masa üstünde sözleşme açık. Osmo yukarıdan. "Hep soruyorlar — 'sözleşme ne diyor?' Anlatayım, açıkça."</li>
+          <li>Maddeleri tek tek geziyor. "Bir: aracın senin üstüne kalır, biz sadece pazarlama hizmeti veriyoruz. İki: hizmet bedeli iki parça — paket peşin 10 bin, satış komisyonu %2-2,5."</li>
+          <li>"Üç: pazarlık limiti senin kararın, biz onun altına asla satmıyoruz. Bu çok önemli — sözleşmede yazıyor, hukuken bağlayıcı."</li>
+          <li>"Dört: alıcı yönetimi bizde. Ama her teklif sana onay için geliyor."</li>
+          <li>Sözleşmenin son maddesine yakın çekim. "Bak burası: 'Müşteri istediği zaman sözleşmeyi feshetme hakkına sahiptir, hizmet paketinin kullanılmamış kısmı iade edilir.' Esir alımıyoruz."</li>
+          <li>Kapanış: "Sözleşmen gizli olmayacak. Profilden bana yaz, örneği gönderirim."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Şeffaflık + güven inşası. "Bu adam saklamıyor" mesajı.</div>
+      </div></div>
+    </article>
+
+    <!-- S3 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S3</div>
+        <div class="head-text">
+          <div class="card-title">Ofise gelen müşteri 1 saat içinde ne yaşıyor?</div>
+          <div class="meta"><span class="chip">Timeline walkthrough</span><span class="chip time">80 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"1 saat içinde neler yaşayacak, adım adım."</div>
+        <ul>
+          <li>Ofisin önünde başlıyor. "Mehmet Bey ofise geliyor. 1 saat içinde neler yaşayacak — adım adım."</li>
+          <li>Kapıdan giriyor (Çağatay abi rol oynuyor müşteri olarak). "Karşılama — çay, kahve. Hiç stres yok, hiç pazarlık başlamamış."</li>
+          <li>Koltukta. "İlk 10-15 dakika tanışma. 'Aracını niye satıyorsun, sonra ne almak istiyorsun, ailen var mı?'"</li>
+          <li>Masaya geçiyor. "Sahibinden birlikte açıyoruz. Fiyat birlikte çıkıyor — dayatma yok."</li>
+          <li>"Sonra pazarlık limiti netleşiyor. Senin kararın."</li>
+          <li>"Sözleşme imzalıyoruz, hizmet paketini tahsil ediyoruz. POS makinesinde 10 bin TL."</li>
+          <li>Çıkış. "Tamam. WhatsApp'tan ekspertiz randevu linki geliyor. Anahtarın sende, aracın sende. 1 saat 10 dakika."</li>
+          <li>Kapanış: "1 hafta sahibinden'de uğraşmak yerine 1 saat bizim ofiste. Seçim senin."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Süreç korkusunu kırıyor. "Bilmediğin bir şey değil, basit aslında" hissi.</div>
+      </div></div>
+    </article>
+
+    <!-- S4 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S4</div>
+        <div class="head-text">
+          <div class="card-title">Bir alıcı aradı, geri çevirdim — niye?</div>
+          <div class="meta"><span class="chip">Real moment</span><span class="chip time">45 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Az önce bir alıcı aradı, geri çevirdim. Anlatayım niye."</div>
+        <ul>
+          <li>Ofiste, telefon az önce kapatılmış. "Az önce bir alıcı aradı, geri çevirdim. Anlatayım niye."</li>
+          <li>"Mehmet Bey'in BMW'si için aradı. Sahibinden ilanı görmüş. 800 bin teklif ediyor, araç 1 milyon 180."</li>
+          <li>"Normal galerici ne yapar? 'Abi gel görelim, konuşuruz' der. Adam gelir, baskı yapar, Mehmet Bey duyarsa stresleniyor."</li>
+          <li>"Biz öyle değiliz. Direkt dedim: 'Hocam, müşterimizin alt limiti 1 milyon 150. 800 ciddi teklif değil, vakit kaybetmeyelim, hayırlı satışlar.' Telefonu kapattım."</li>
+          <li>"Bu Mehmet Bey'in zaten bizde olmasının sebebi — biz onu rahatsız edici tekliflerden koruyoruz. O gelmiyor bile sayfaya, biz eliyoruz."</li>
+          <li>Kapanış: "Bunu sahibinden tek başına satarken yapamazsın. Biz koruma kalkanıyız."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Konkret bir koruma örneği. "Bu adamlar müşterinin tarafında" mesajı.</div>
+      </div></div>
+    </article>
+
+    <!-- S5 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S5</div>
+        <div class="head-text">
+          <div class="card-title">Müşteri paneli — telefondan her şeyi gör</div>
+          <div class="meta"><span class="chip">Tech demo</span><span class="chip time">55 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Her müşterimize özel müşteri paneli. Bak ne gösteriyor."</div>
+        <ul>
+          <li>Telefon ekranı kayıt. CRM müşteri paneli açık. "Bu ne biliyor musun? Müşteri paneli. Her müşterimize özel."</li>
+          <li>Ekranı geziyor. "Bak, Mehmet Bey'in Volvo'sunun durumu: ilan yayında 4 gün, 847 izlenme, 23 favori, 8 mesaj."</li>
+          <li>"Mesajları gözüyle görüyor — galericiler kırmızı, ciddi alıcılar yeşil. Galericiler benim panelimden hiç çıkmıyor, sadece istatistikte sayılıyor."</li>
+          <li>"Haftada bir WhatsApp'tan kısa rapor: '847 izlenme bu hafta, 1 ciddi alıcı, görüşme planlanıyor.'"</li>
+          <li>"Mehmet Bey istediği zaman açıyor, görüyor. Biz hiçbir şey saklamıyoruz."</li>
+          <li>Kapanış: "Sahibinden böyle bir panel veriyor mu sana? Vermiyor. Biz veriyoruz."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Yazılım/teknoloji yatırımımızı gösteriyor. Modern operasyon hissi.</div>
+      </div></div>
+    </article>
+
+    <!-- S6 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S6</div>
+        <div class="head-text">
+          <div class="card-title">Aracı stüdyoda nasıl çekiyoruz — şeffaflık</div>
+          <div class="meta"><span class="chip">Process documentary</span><span class="chip time">75 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Burası bizim stüdyo. Her hafta 3-4 araç buraya geliyor."</div>
+        <ul>
+          <li>Stüdyo girişi, ışıklar yanıyor, platform dönüyor. "Burası bizim stüdyo. Her hafta 3-4 araç buraya geliyor."</li>
+          <li>Aracın platforma alınması. "Bak, dönen platform. Araç 360 derece dönüyor. Sabit kameralar her açıdan çekim yapıyor."</li>
+          <li>"Niye 360? Çünkü il dışından alıcı geldiğinde gerçeği görsün. Antalya'dan Bursa'ya araba bakacak adam yola çıkmadan tam hakimiyet kurmalı."</li>
+          <li>Kırmızı sticker örneği. Eline alıyor. "İşte bu konsept. Aracın sağ ön çamurluğunda hafif çizik var. Onu saklamıyoruz — kırmızı sticker yapıştırıyoruz, fotoğrafa böyle giriyor, ilana eklenti yazıyoruz."</li>
+          <li>"Niye? Çünkü alıcı geldiğinde 'abi bu çizik vardı, fiyat düşelim mi' demesin. Önceden biliyor, pazarlığı bitmiş."</li>
+          <li>Kapanış: "Sahibinden satarken sen mi yaparsın bunu? Yapmazsın. Biz standart olarak yapıyoruz."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Görsel olarak güçlü + somut fark gösterimi.</div>
+      </div></div>
+    </article>
+
+    <!-- S7 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S7</div>
+        <div class="head-text">
+          <div class="card-title">Anlaşmalı eksperdeyim — fiyat farkı niye yarısı?</div>
+          <div class="meta"><span class="chip">Field visit</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Müşterinin aracını getirdim ekspertize. Anlaşmalı yerimiz."</div>
+        <ul>
+          <li>Pilot Garaj'a giriş. "Müşterinin aracını getirdim ekspertize. Anlaşmalı yerimiz."</li>
+          <li>Ahmet Hoca ile selamlaşma. "Ahmet abi, müşterinin Mercedes'i geldi."</li>
+          <li>Ahmet Hoca iş yaparken. Çağatay abi yan tarafta, kameraya. "Bu eksper bireysel müşteriden 9 bin alıyor. Bizden 4 bin. Aradaki fark 5 bin TL — direkt müşterinin cebine giriyor."</li>
+          <li>"Niye? Çünkü biz ayda 25-30 araç gönderiyoruz. Volüm avantajı. Sen tek aracını sattığında bunu alamıyorsun, biz alıyoruz, müşteriye yansıtıyoruz."</li>
+          <li>"Aynı sistem fotoğrafçıda, yıkamada. Hizmet paketi 10 bin TL, gerçek piyasa değeri 15-17 bin. Sen paranı koruyorsun."</li>
+          <li>Kapanış: "Ekspertiz, fotoğraf, yıkama — bu üçünü tek tek yapacaksan zaman + para yiyor. Bizde standart."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Somut rakamlar + gerçek mekân + sektörel ağ gösterimi.</div>
+      </div></div>
+    </article>
+
+    <!-- S8 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S8</div>
+        <div class="head-text">
+          <div class="card-title">Galericiler bana ne diyor? Sahnenin arkasından</div>
+          <div class="meta"><span class="chip">Insider perspective</span><span class="chip time">60 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Galerici dostlarım bana ne soruyor biliyor musun?"</div>
+        <ul>
+          <li>Ofiste, koltukta, gülerek. "Galerici dostlarım bana ne soruyor biliyor musun? Anlatayım."</li>
+          <li>"Geçen hafta Murat (eski meslektaş) sordu: 'Çağatay, sen bu modelle galericilere alternatif mi oluyorsun yani? Bizi öldürüyor musun?'"</li>
+          <li>"Dedim ki — hayır. Sen alıcı tarafındasın, ben satıcı tarafındayım. Aslında biz tamamlayıcıyız."</li>
+          <li>"Sen müşterilerini buluyorsun aracı bana getirebilirler. Senin müşterilerinden biri 'ben aracımı tek başıma satmak istiyorum' derse bana yönlendir. Ben ödeme yapıyorum referans için."</li>
+          <li>"Murat şimdi bize ayda 2-3 müşteri yönlendiriyor. Galerici bizimle çalışıyor — kavga değil, işbirliği."</li>
+          <li>Kapanış: "Bu işin sırrı bu — kavga ekonomisi değil, paylaşım ekonomisi. Sektördeki kimseyi düşman görmüyoruz."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Sektörel olgunluk + galerici nefreti yok mesajı. Çağatay abi'yi olgunlaştırıyor.</div>
+      </div></div>
+    </article>
+
+    <!-- S9 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S9</div>
+        <div class="head-text">
+          <div class="card-title">Bu hafta 12 form geldi — kaçı satışa döndü?</div>
+          <div class="meta"><span class="chip">Honest stats</span><span class="chip time">55 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"12 form geldi. Kaçı satışa döndü? Dürüst söyleyeceğim."</div>
+        <ul>
+          <li>Bilgisayar başında, CRM açık. "Bu hafta 12 form geldi. Kaçı satışa döndü? Dürüst söyleyeceğim."</li>
+          <li>Ekrana zoom. "Bak: 12 form. 8'ine WhatsApp'tan dönüş yaptık. 4'ü cevap vermedi — vazgeçmiş olabilir, başka çözüm bulmuş olabilir, bilemem."</li>
+          <li>"8 cevap verenden 5'i ofise geldi. 3'ü 'düşüneceğim' dedi, gitmedi. 5 gelenden 4'ü sözleşme imzaladı. 1'i pazarlık limitinde anlaşamadık."</li>
+          <li>"Yani 12 formdan 4 satış. %33 dönüşüm. Galericiler size '%100 satıyoruz' diyor ama yalan — onlar düşük fiyat verir, müşteri kabul eder, 'satış' diyorlar. Biz fiyatı koruyoruz, herkesle anlaşmıyoruz."</li>
+          <li>Kapanış: "Şeffaf olmak böyle. Profili takip et, gerçek rakamlar görelim."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Dürüstlük çok güçlü. Hiç kimse rakamları paylaşmaz, biz paylaşıyoruz.</div>
+      </div></div>
+    </article>
+
+    <!-- S10 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S10</div>
+        <div class="head-text">
+          <div class="card-title">"Beklediğim fiyatı vermedin" dedi, ne yaptım?</div>
+          <div class="meta"><span class="chip">Real scenario</span><span class="chip time">60 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Geçen hafta zor bir görüşme oldu. Anlatayım."</div>
+        <ul>
+          <li>Ofiste, koltukta. "Geçen hafta zor bir görüşme oldu. Anlatayım."</li>
+          <li>"Mehmet Bey geldi, Audi A6'sını satmak istiyor. Beklentisi 2 milyon 200. Ben sahibinden açıp birlikte baktık — gerçekçi fiyat 1 milyon 900-1 milyon 950."</li>
+          <li>"Mehmet Bey 'olmaz, ben 2 milyon 200'ün altına satmam' dedi. Ne yapacaktım? Yalan söyleyip 'tamam abi 2 milyon 200 koyalım' diyebilirdim. 3 ay satılmazdı, Mehmet Bey kızgın çıkardı."</li>
+          <li>"Bunun yerine dedim ki: 'Mehmet Bey, fiyat piyasayı tutmuyor. Sözleşme imzalayamayız. İsterseniz 6 ay sonra fiyatlar değişebilir, o zaman tekrar konuşalım. Sizi yanlış yönlendirmem.'"</li>
+          <li>"Mehmet Bey sinirlendi, çıktı. Hafta sonu beni aradı — başka 2 galeri de aynı şeyi söylemiş. 'Çağatay haklıydı, gelin sözleşme yapalım' dedi. Şimdi 1 milyon 920 ile listeli."</li>
+          <li>Kapanış: "Dürüstlük bazen kısa vadede para kaybettirir, uzun vadede kazandırır."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Karakter gösterimi. Çağatay abi'yi sevdiriyor.</div>
+      </div></div>
+    </article>
+  </div>
+
+  <!-- SICAK -->
+  <div class="group" id="g-sicak">
+    <div class="sec-label sicak">
+      <span class="bar"></span>
+      <h2>Satışa Götüren</h2>
+      <small>Net CTA · Sıcak</small>
+    </div>
+
+    <!-- SI1 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ1</div>
+        <div class="head-text">
+          <div class="card-title">Aracını satmaya karar verdin? İlk 3 adım</div>
+          <div class="meta"><span class="chip">Action guide</span><span class="chip time">60 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"İlk 3 adımı söyleyeceğim. 5 dakikalık iş."</div>
+        <ul>
+          <li>Ofiste, kameraya doğrudan. "Aracını satmaya karar verdin? İlk 3 adımı söyleyeceğim. 5 dakikalık iş."</li>
+          <li>"Bir: arabavitrin.com'a gir. Anasayfada form var. 4 alan: ad-soyad, telefon, aracın markası-modeli, ekspertizin var mı."</li>
+          <li>Telefon ekranı gösteriyor — form açık. "Bak, formu açtım. Aslında 3 dakikada doluyor."</li>
+          <li>"İki: 10 dakika içinde sana WhatsApp'tan hem yazılı hem sesli mesaj geliyor. Otomatik değil, kişisel."</li>
+          <li>"Üç: müsait olduğun gün ofise davet ediyoruz. 1 saatlik görüşme. Hiçbir taahhüt yok — gel, konuş, beğenirsen başlarız, beğenmezsen rahat çıkarsın."</li>
+          <li>Kapanış: "arabavitrin.com — şu an aç, formu doldur. Antalya'dayım, seni bekliyorum."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Net CTA, korkusuz başlangıç, somut zaman.</div>
+      </div></div>
+    </article>
+
+    <!-- SI2 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ2</div>
+        <div class="head-text">
+          <div class="card-title">Hizmet bedelimiz tam olarak ne? Net hesap</div>
+          <div class="meta"><span class="chip">Transparent pricing</span><span class="chip time">65 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Hiçbir şey saklamadan hesaplayalım."</div>
+        <ul>
+          <li>Masa başında, kağıt-kalem. "Komisyon ne kadar, paket ne kadar, hiçbir şey saklamadan hesaplayalım."</li>
+          <li>Kağıda yazıyor: "Paket bedel: 10.000 TL. Ekspertiz + fotoğraf + yıkama dahil. Peşin, ofiste."</li>
+          <li>"Satış bedeli: 1 milyon altı %2,5. 1-2 milyon arası %2. 2 milyon üstü yine %2."</li>
+          <li>Örnek hesap. "1 milyon 200'lük araç. Paket 10.000. Satış komisyonu 24.000. Toplam bize 34.000 TL ödüyorsun."</li>
+          <li>"Karşılaştır. Galericiye götürdüğünde sana 950 verir, 1 milyon 100'e satar. Senin 'gizli' kaybın 150.000 TL. Bizdeki açık ödeme 34.000."</li>
+          <li>"Aradaki 116.000 TL senin cebinde kalıyor."</li>
+          <li>Kapanış: "Hesap net. arabavitrin.com — gel detaylı konuşalım."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Şeffaf fiyat çok az şirket yapar. Net hesap = güven.</div>
+      </div></div>
+    </article>
+
+    <!-- SI3 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ3</div>
+        <div class="head-text">
+          <div class="card-title">Aracını teslim etmiyorsun — sende kalıyor, niye?</div>
+          <div class="meta"><span class="chip">Differentiation</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Aracı size getirmiyor muyum? Hayır, getirmiyorsun."</div>
+        <ul>
+          <li>Otoparkta, arabaların arasında yürüyerek. "İlk soran herkes şaşırıyor: 'Aracı size getirmiyor muyum?' Hayır, getirmiyorsun."</li>
+          <li>"Galericilerle bizim aramızdaki en büyük fark bu. Galericiye götürdüğünde araç onların oluyor. Konsinyede de aynı — fiziksel olarak orada."</li>
+          <li>"Bizde aracın sende kalıyor. Sözleşmeyi imzaladıktan sonra evine gidiyorsun, arabanı kullanmaya devam ediyorsun. Sadece 3 randevu var: ekspertiz, yıkama, fotoğraf. Hepsi 2-3 saatlik."</li>
+          <li>"Bu niye önemli? Bir: trafik cezası, kazaya karışma gibi sorumluluklar sende kalmıyor — zaten senin. İki: aracını kullanamadığın için günlük hayatın bozulmuyor. Üç: galerici 'satılmadı, masraflar şu kadar' diye karşına çıkamıyor."</li>
+          <li>Kapanış: "arabavitrin.com — sat ama anahtarını teslim etme."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Konkret farklılaşma. "Diğer modellerle bunu karıştırma" mesajı.</div>
+      </div></div>
+    </article>
+
+    <!-- SI4 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ4</div>
+        <div class="head-text">
+          <div class="card-title">Pazarlık limiti senin kararın — niye önemli?</div>
+          <div class="meta"><span class="chip">Control & power</span><span class="chip time">55 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"En altta hangi rakama satarız? Bu senin kararın."</div>
+        <ul>
+          <li>Ofiste, masa başında. "Aracın sözleşmesini imzalarken sana bir soru soruyorum: 'En altta hangi rakama satarız?' Bu senin kararın."</li>
+          <li>"Yazıyoruz sözleşmeye. Bu rakamın altında kimseye satış kapatmıyoruz, sözleşmede yazıyor."</li>
+          <li>"Niye bu önemli? Çünkü alıcı geldiğinde 'şu fiyata olur mu' diye pazarlık yapacak. Eğer senin koyduğun limit 1 milyon 130 ise, biz 1 milyon 130'un altına asla gitmiyoruz. 1 milyon 100 teklif gelirse 'kabul edemiyoruz' diyoruz."</li>
+          <li>"Galericide kontrol senin değil. Onun cebine ne girecek, ne kadarına satacak — bilmiyorsun, sormuyorsun. Bizde kontrol sende."</li>
+          <li>"Eğer 'sat artık şu fiyata' demek istersen istediğin zaman limiti değiştiriyoruz. Tek sözüne bakar."</li>
+          <li>Kapanış: "Kontrolü kaybetme, satışı yine yap. arabavitrin.com."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>"Kontrolü kaybediyorum" korkusunu çözüyor. Güç dengesi mesajı.</div>
+      </div></div>
+    </article>
+
+    <!-- SI5 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ5</div>
+        <div class="head-text">
+          <div class="card-title">Satış kapanmazsa ne oluyor? Tüm senaryolar</div>
+          <div class="meta"><span class="chip">What-if</span><span class="chip time">70 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"En kötü senaryoları konuşalım."</div>
+        <ul>
+          <li>Ofiste, gülerek. "Herkes soruyor: 'Aracım satılmazsa ne oluyor?' En kötü senaryoları konuşalım."</li>
+          <li>"Senaryo 1: 3 ay geçti, ilan yayında, ciddi alıcı yok. Ne oluyor? Birlikte oturup yeniden değerlendiriyoruz. Belki fiyatı düşürmek lazım, belki başka platforma açılmak lazım. Karar yine senin."</li>
+          <li>"Senaryo 2: Sen 'satmaktan vazgeçtim, ilanı indirin' dedin. Sözleşmeyi feshediyoruz. Paket bedel iade edilmiyor — hizmet alındığı için. Ama satış komisyonu zaten satışa bağlıydı, sıfır."</li>
+          <li>"Senaryo 3: Acil ihtiyacın çıktı, hızlı satmak istiyorsun. Limit fiyatını düşürüyoruz, agresif fiyatlama yapıyoruz, 2 hafta içinde satılır."</li>
+          <li>"Senaryo 4: Aracını sahibinden bir tanıdığın istedi, sen direkt satmak istiyorsun. Sorun yok — sözleşmeyi feshediyoruz, paket bedel zaten alındı, sen istediğine satıyorsun."</li>
+          <li>"Yani her senaryoda kontrol sende. Bizi bağlamadık seninle."</li>
+          <li>Kapanış: "Sözleşmeden korkma. Çıkışı kolay. arabavitrin.com."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>"Tuzak mı?" korkusunu kırıyor. Esneklik mesajı.</div>
+      </div></div>
+    </article>
+
+    <!-- SI6 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ6</div>
+        <div class="head-text">
+          <div class="card-title">İlk müşterimiz — 19 günde sattı, hikayesi</div>
+          <div class="meta"><span class="chip">Customer success</span><span class="chip time">90 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Mehmet Bey, ilk müşterilerimizden. 19 günde sattı."</div>
+        <ul>
+          <li>Ofiste, Mehmet Bey kahve içerken (yüzünü gösterme tercihi onun). "Mehmet Bey, ArabaVitrin'in ilk müşterilerinden. 19 günde i20'sini sattı."</li>
+          <li>Mehmet Bey kendi anlatıyor: "2 ay sahibinden'de uğraşıyordum. 80 telefondan 78'i galerici, 2'si ciddi ama düşük fiyat. Cesaretim kırılmıştı."</li>
+          <li>"Çağatay'ı kızım önerdi, videolarını izlemiş. Geldim ofise. 1 saat konuştuk, sözleşme imzaladık, hizmet paketi 10 bin verdim."</li>
+          <li>"3 gün sonra ilanım vitrindeydi. 15 gün içinde 3 ciddi alıcı geldi, hiç görüşmedim direkt onlarla — Çağatay yönetti. 19. günde Konya'dan bir alıcıyla noterde."</li>
+          <li>"Net cebime giren para 1 milyon 145. Galericiye versem 950-1 milyon arası söylüyordu. 145-200 bin fark."</li>
+          <li>Çağatay devralıyor. "Mehmet Bey'in deneyimi standart. Sen de yapabilirsin."</li>
+          <li>Kapanış: "Sıraya gir. arabavitrin.com."</li>
+        </ul>
+        <div class="note">Not: İlk müşteri çıkana kadar bekle, çıktığında ilk hafta içinde çek.</div>
+        <div class="why"><b>Niye işe yarar</b>Sosyal kanıt — bu kategorideki en güçlü içerik tipi.</div>
+      </div></div>
+    </article>
+
+    <!-- SI7 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ7</div>
+        <div class="head-text">
+          <div class="card-title">Şu 4 belge tamamsa anında satıyorum</div>
+          <div class="meta"><span class="chip">Quick checklist</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Bu 4 belgeyi hazır et, süreç 2 hafta hızlanır."</div>
+        <ul>
+          <li>Masada belgeler. Tek tek gösteriyor. "Aracını satmaya gelmeden bu 4 belgeyi hazır et — süreç 2 hafta hızlanır."</li>
+          <li>"Bir: ruhsat fotokopisi. Aslı sende kalıyor ama biz fotokopisini ofiste alıyoruz."</li>
+          <li>"İki: TRAMER sorgusu. E-Devlet'ten 2 dakikada — hasar geçmişini gösteriyor. Olmadan ciddi alıcı vermez."</li>
+          <li>"Üç: Vergi borcu sorgusu. Yine E-Devlet. MTV, ceza varsa noterde sorun çıkar. Önceden hallet."</li>
+          <li>"Dört: Son ekspertiz raporu, varsa. 15 günden eski değilse kabul ediyoruz, eskiyse yeniden yapıyoruz anlaşmalı yerde."</li>
+          <li>"Bu 4 belge cebinde olunca ofise gelince yarı yarıya iş bitiyor. Yoksa süreç uzar."</li>
+          <li>Kapanış: "Hazır mısın? arabavitrin.com — başla."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Pratik + harekete geçirici. Adam "ben de hazırlamaya başlayayım" diyor.</div>
+      </div></div>
+    </article>
+
+    <!-- SI8 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ8</div>
+        <div class="head-text">
+          <div class="card-title">Bugün 3 sözleşme imzalandı — kim, ne, niye</div>
+          <div class="meta"><span class="chip">Live update</span><span class="chip time">55 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Bugün 3 sözleşme imzaladık. Sırasıyla anlatayım."</div>
+        <ul>
+          <li>Ofiste, akşam saati. "Bugün 3 sözleşme imzaladık. Sırasıyla anlatayım."</li>
+          <li>"Sabah 10: Mehmet Bey, Toyota Corolla 2021, 1 milyon 280'e listeleyecek. Yeni iş aldı, ulaşım sağlanıyor, satıyor."</li>
+          <li>"Öğlen 13: Ayşe Hanım, Mini Cooper Cabrio 2019, 1 milyon 850. Kullanmıyormuş, hediyeydi, satıyor."</li>
+          <li>"Akşam 17: İsmail Bey, Range Rover Evoque 2022, 2 milyon 400. Yeni bir model alacak, eskisini tasfiye ediyor."</li>
+          <li>"Bu 3 araç bu hafta vitrine giriyor. Önümüzdeki 30 gün içinde 3'ünün de satılması bekliyor."</li>
+          <li>"Eğer aracını satmayı düşünüyorsan bu 3 müşteriden biri olabilirsin. Geç kalma."</li>
+          <li>Kapanış: "arabavitrin.com — sıraya gir."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Sosyal momentum gösterimi. "Birçok kişi yapıyor zaten" mesajı.</div>
+      </div></div>
+    </article>
+
+    <!-- SI9 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ9</div>
+        <div class="head-text">
+          <div class="card-title">Antalya dışındayım — yine çalışabilir misin?</div>
+          <div class="meta"><span class="chip">Expansion teaser</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"İlk 100 form Antalya dışından geldi. Sürekli soruyorlar."</div>
+        <ul>
+          <li>Ofiste, harita göstererek. "İlk 100 form Antalya dışından geldi. Sürekli soruyorlar: 'Bizde de yapıyor musunuz?'"</li>
+          <li>"Şu an pilot dönem — sadece Antalya'da çalışıyoruz. Niye? Çünkü model henüz oturuyor, kalite kontrol için bölge sınırı tutuyoruz."</li>
+          <li>"Ama planımız var: 2026 başı Muğla, 2026 ortası Aydın ve Burdur, sonra Ege Akdeniz şeritleri."</li>
+          <li>"Eğer Antalya dışından isen ve aracını satmak istiyorsan iki seçeneğin var: bir — ben sana sektördeki güvenilir tanıdıklarımı yönlendirebilirim, hatır işiyle. İki — Antalya'ya gelmek zorunda değilsin, biz aracını alıp getirip götürebiliriz, ek hizmet."</li>
+          <li>Kapanış: "İl dışıysan profilden bana yaz, çözüm bulalım."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Pazarı büyütüyor + insanları kapatmıyor. "Bize de gelir" hissi.</div>
+      </div></div>
+    </article>
+
+    <!-- SI10 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ10</div>
+        <div class="head-text">
+          <div class="card-title">Sözleşme imzalamadan önce 3 soru sor bana</div>
+          <div class="meta"><span class="chip">Confidence builder</span><span class="chip time">60 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Cevabımı beğenmezsen imzalama, çık."</div>
+        <ul>
+          <li>Ofiste, koltukta, rahat. "Sözleşme imzalamadan önce şu 3 soruyu sor bana. Cevabımı beğenmezsen imzalama, çık."</li>
+          <li>"Bir: 'Bu sözleşmeden çıkmak istersem ne olur?' Cevap: cezaen ödeme yok. Hizmet paketi alındığı için iade yok, ama tahsil edilen para kalır, başka yok."</li>
+          <li>"İki: 'Aracımı 1 ay içinde başkasına satmak istersem ne olur?' Cevap: sözleşmeyi feshediyoruz, paket bedel zaten ödenmişti, başka borcun yok."</li>
+          <li>"Üç: 'Limitin altında satar mısınız?' Cevap: hayır, sözleşmede yazıyor, hukuki olarak bağlayız."</li>
+          <li>"Bu üç cevap sana yetmediyse imzalama. Ama bu cevaplarda sana güvence yetiyorsa endişen yok."</li>
+          <li>Kapanış: "Soruları sor, kararı ver. arabavitrin.com — hadi başlayalım."</li>
+        </ul>
+        <div class="why"><b>Niye işe yarar</b>Şüpheli adamı rahatlatıyor. "Bu adamlar saklamıyor" hissi.</div>
+      </div></div>
+    </article>
+  </div>
+
+  <!-- KAMERA (Talking Head) -->
+  <div class="group" id="g-kamera">
+    <div class="sec-label kamera">
+      <span class="bar"></span>
+      <h2>Doğrudan Kamera</h2>
+      <small>Talking head · Hook→Gövde→Kapanış</small>
+    </div>
+
+    <!-- D1 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D1</div>
+        <div class="head-text">
+          <div class="card-title">Galerici dostum bana dün şunu söyledi</div>
+          <div class="meta"><span class="chip">Soğuk + insider havası</span><span class="chip time">45 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–3 sn</span></div><div class="box">"Galerici dostum dün bana şunu söyledi: 'Bu işi bilenler 1 tane, bilmeyenler 100 tane. Müşterimin %90'ı bilmeyen.' Şokumu anlatayım."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">3–35 sn</span></div><div class="box"><p>"Bizim sektörde içeriden konuştuk — Murat 15 yıllık galerici. 'Müşteri girdiğinde ilk 30 saniyede karar veriyorum, satıcı mı bilen mi bilmeyen mi' dedi. 'Bilmeyen sözüne ne kadar açık biliyor musun? Yüzde 90'ına 200 bin altında fiyat veriyorum, hiçbir zaman itiraz etmiyorlar. Bilen olsa 50 binde anlaşırdım.'"</p><p>"Bu çok rahatsız etti beni. Aynı araç, aynı durum, ama bilgin yok diye 150 bin kaybediyorsun. Bilgi farkı kaynaklı tek faktör bu."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">35–45 sn</span></div><div class="box">"Bilen ol. Aracını satmadan profilime gel, tüyolar var. Takip et, paylaşmaya devam edeceğim."</div></div>
+        <div class="note">Çekim notu: Samimi tonda — Çağatay abi sırrını paylaşıyor havasında. Yakın çekim, sessiz konuşma.</div>
+      </div></div>
+    </article>
+
+    <!-- D2 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D2</div>
+        <div class="head-text">
+          <div class="card-title">Aracın fiyatını söylerken bu 1 hata seni 100 bin yer</div>
+          <div class="meta"><span class="chip">Soğuk + pratik tüyo</span><span class="chip time">40 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–3 sn</span></div><div class="box">"Aracını satarken fiyatı söylediğinde 1 hata yapıyorsun, 100 bin yiyorsun. Düzeltmesi 5 saniye."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">3–30 sn</span></div><div class="box"><p>"Hata şu: '1 milyon 200, son fiyat' diyorsun. Alıcı bunu duyduğu an pazarlık yapamayacağını anlıyor. Telefonu kapatıyor. Sen 'son fiyat' diyince alıcının kafasında 'pazarlık şansım yok, başka ilana bakayım' düşüncesi oluşuyor."</p><p>"Doğru söylem ne? '1 milyon 200, çıkar pazarlık olabilir' veya '1 milyon 200, görüştükten sonra konuşuruz'. Bu cümleler kapıyı açık tutuyor. Alıcı arıyor, görüşüyor, sen istediğin fiyata getiriyorsun."</p><p>"'200, son fiyat' demek = 'beni arayıp zamanını harcama' demek aslında. Telefon kapanıyor."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">30–40 sn</span></div><div class="box">"Bu cümleyi düzelt. Yarına kadar tek sayfalık fark görürsün. Takip et, başka tüyolar gelecek."</div></div>
+        <div class="note">Çekim notu: Pratik bilgi videosu — orta enerjili anlatım.</div>
+      </div></div>
+    </article>
+
+    <!-- D3 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D3</div>
+        <div class="head-text">
+          <div class="card-title">Aracını satarken asla yapmaman gereken 3 şey</div>
+          <div class="meta"><span class="chip">Soğuk + liste formatı</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–3 sn</span></div><div class="box">"Aracını satarken asla yapmaman gereken 3 şey. Birini bile yapıyorsan parayı yedin."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">3–40 sn</span></div><div class="box"><p>"Bir: ilanda yıkanmamış araç fotoğrafı koymak. Kirli araba = bakımsız hissi. Adam ilanını açıyor, 2 saniye bakıp geçiyor. 500 TL'lik yıkama, 30 bin fiyat farkı."</p><p>"İki: 'Acelem var, hızlı satmam lazım' yazmak veya söylemek. Bu cümleyi duyduğu an alıcı kazandı. Fiyat %20 düşer. Acelen olsa bile sakla."</p><p>"Üç: galericiye ilk gittiğinde teklif kabul etmek. Galerici bilir ki sen başka 5 galeri gezeceksin. İlk teklif en düşük tekliftir. Asla ilk teklife evet deme. 3 galeri gez, fiyatları kıyasla, sonra dön."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">40–50 sn</span></div><div class="box">"Bu 3'ünden kurtul, satış fiyatın 100 bin artar. Bilen arkadaşına gönder bu videoyu."</div></div>
+        <div class="note">Çekim notu: Liste formatı net olmalı. Her madde söylenirken parmaklar görünsün.</div>
+      </div></div>
+    </article>
+
+    <!-- D4 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D4</div>
+        <div class="head-text">
+          <div class="card-title">Niye bizim modelimizi anlamadıklarını anlıyorum</div>
+          <div class="meta"><span class="chip">Ilık + bağ</span><span class="chip time">60 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–4 sn</span></div><div class="box">"İnsanlar bize 'siz tam olarak ne yapıyorsunuz' diye soruyor sürekli. Anlamamaları çok normal — anlatayım."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">4–50 sn</span></div><div class="box"><p>"Türkiye'de aracını satmanın yıllardır 3 yolu var: galericiye sat, sahibinden'de tek başına sat, ya da konsiye bırak. Üçü de bilinen şeyler."</p><p>"Biz dördüncüyü ekledik: vekaletli pazarlama hizmeti. Bu Türkiye'de kimsenin yapmadığı bir model. O yüzden 'biz X'iz' diye tek cümleyle anlatamıyoruz."</p><p>"Galerici değiliz — biz aracı almıyoruz. Konsiye değiliz — aracı alıp koymak yok, sende kalıyor. Aracılık ofisi değiliz — sadece pazarlık değil, tüm satış sürecini yönetiyoruz. Reklam ajansı değiliz — sadece ilan değil, alıcı yönetimi de var."</p><p>"En yakın benzetme: gayrimenkul danışmanı gibi. O da senin evini almıyor, sana danışmanlık ediyor. Biz de aracın için aynısını yapıyoruz."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">50–60 sn</span></div><div class="box">"İlk defa duyduğun bir model. Kafan karıştıysa profilden yaz, konuşalım."</div></div>
+        <div class="note">Çekim notu: Sakin, açıklayıcı ton. Çağatay abi öğretmen havasında.</div>
+      </div></div>
+    </article>
+
+    <!-- D5 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D5</div>
+        <div class="head-text">
+          <div class="card-title">Sahibinden'de 80 telefon kabusu — nasıl önlerim?</div>
+          <div class="meta"><span class="chip">Soğuk + sorun-çözüm</span><span class="chip time">45 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–3 sn</span></div><div class="box">"Aracını sahibinden'e koyduğun an 80 telefon kabusu başlar. Bunu önlemenin 1 yolu var."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">3–35 sn</span></div><div class="box"><p>"Sahibinden'e koydun mu o anki algoritmaya göre ilanın görünüyor. İlk 24 saatte 50 telefon — %90'ı galerici, takasçı, fiyat soran. Sen elemek için her birine 'galerici misiniz' diye soruyor, yoruluyorsun."</p><p>"Çözüm: ilanı WhatsApp ile iletişim olarak ayarla, telefon değil. Mesaj atan adam zaten daha ciddi. Mesajdaki ilk soru: 'aracı görmeye gelmek istiyorum, hangi gün?' Eğer adam buna cevap vermiyor, fiyat pazarlığına başlıyorsa galerici demektir, eleyeceksin."</p><p>"Bu basit ayar 80 telefonu 10'a indiriyor. Geri kalan 70'ten kurtuluyorsun."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">35–45 sn</span></div><div class="box">"Bu tek ayar bile büyük rahatlık. Takip et, başka tüyolar gelecek."</div></div>
+        <div class="note">Çekim notu: Pratik, direkt. Bilgisayar ekranı b-roll olarak eklenebilir.</div>
+      </div></div>
+    </article>
+
+    <!-- D6 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D6</div>
+        <div class="head-text">
+          <div class="card-title">Galericiye 'aracımı satın al' deme — bunu de</div>
+          <div class="meta"><span class="chip">Soğuk + pazarlık taktiği</span><span class="chip time">40 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–3 sn</span></div><div class="box">"Galericiye girdiğinde ilk söyleyeceğin cümle pazarlığın %50'sini belirliyor. Doğrusu hangisi?"</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">3–30 sn</span></div><div class="box"><p>"Yanlış: 'Aracımı satmak istiyorum, fiyat verir misiniz?' Bu cümleyle adamın pozisyonu güçleniyor — sen muhtaçsın, o güçlü."</p><p>"Doğru: 'Aracım satıyorum, sahibinden'de şu fiyata ilanlıyım, gelen ciddi tekliflerden birkaçı var. Sizin değerinizi de görmek istedim.' Bu cümleyle pozisyonu değiştirdin — sen alternatif arıyorsun, o seninle yarışıyor."</p><p>"Galerici bu cümleyi duyduğunda kafadan 200 bin daha yukarı çıkar. Çünkü 'sahibinden ilanı + ciddi teklifler' demek senin alternatifin var demek. Mecbur değilsin onunla anlaşmaya."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">30–40 sn</span></div><div class="box">"Bu cümleyi kullan. Sonucu paylaşan olursa bana yaz."</div></div>
+        <div class="note">Çekim notu: Yarı-rol yapma var — Çağatay abi iki tonu da gösterirse iyi olur.</div>
+      </div></div>
+    </article>
+
+    <!-- D7 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D7</div>
+        <div class="head-text">
+          <div class="card-title">Ekspertizini 15 günden eski kabul etmiyorum — niye?</div>
+          <div class="meta"><span class="chip">Ilık + yetkinlik</span><span class="chip time">45 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–4 sn</span></div><div class="box">"Müşterim 1 ay önce yaptığı ekspertizi getirdi, kabul etmedim. Niye? Adam üzüldü ama haklıydım."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">4–35 sn</span></div><div class="box"><p>"Ekspertiz raporu o anki aracın durumunu gösteriyor. 1 ay önce yapılan rapor o gün için doğruydu — aradan geçen sürede neler olmuş bilmiyoruz."</p><p>"Düşün: adam 1 ay önce ekspertiz yaptırdı, temiz çıktı. 3 gün sonra kazaya karıştı, küçük bir tampona vurdu, tamir ettirdi. Eski raporu temiz gösteriyor, ama gerçek temiz değil."</p><p>"Biz aracı bugünkü halinde satmak zorundayız. Alıcı 1 hafta sonra geldiğinde 'eski rapor verdiniz, ben yeniden ekspertiz yaptıracağım' diyor. Eğer yeni ekspertiz fark gösterirse satış patlar, alıcı kaçar, biz utanırız, müşteri zarar görür."</p><p>"O yüzden 15 gün limit. Daha eskisi varsa yeniden yapıyoruz — 4 bin TL ek masraf, ama satışın güvenliği için şart."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">35–45 sn</span></div><div class="box">"Detaylar önemli. Profilden başka standartları gör."</div></div>
+        <div class="note">Çekim notu: Uzmanlık konuşması. Sakin, açıklayıcı, biraz eğitici.</div>
+      </div></div>
+    </article>
+
+    <!-- D8 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D8</div>
+        <div class="head-text">
+          <div class="card-title">Biri 'aracını ucuza ver' dediğinde ne yapmalısın</div>
+          <div class="meta"><span class="chip">Soğuk + pazarlık güçlendirme</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–3 sn</span></div><div class="box">"Pazarlıkta alıcı 'kardeşim ucuza ver' dediğinde ne dersin? %90 yanlış cevap veriyor."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">3–40 sn</span></div><div class="box"><p>"İçgüdüsel cevap: 'olmaz abi, fiyat şu.' Bu cevap defansif — sen kendini savunuyorsun. Adam kazandı."</p><p>"Doğru cevap iki parça:"</p><p>"Bir: soru sor. 'Niye ucuza versen istiyorsun? Aracın değerini düşürecek bir şey mi gördün?' Bu soru topu adama atıyor. Cevabı yoksa 'sadece ucuza versin' diyor — bu durumda zaten ciddi alıcı değil."</p><p>"İki: gerekçeli karşı çık. 'Sahibinden'de aynı yıl-paket araçlar 1 milyon 200-1 milyon 280 arasında. Bu fiyat altına vermem mantıksız olur. Şu satış geçmişlerine bak.' Veri ile karşı çıkıyorsun, hissiyatla değil."</p><p>"Bu iki tekniği kullanırsan pazarlığın gücü sende kalır. Alıcı ya sözünden geri çekilir ya da gerçek bir teklif getirir."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">40–50 sn</span></div><div class="box">"Pazarlık öğrenilen bir şey. Profilden başka taktikler var, takip et."</div></div>
+        <div class="note">Çekim notu: Eğitici ton. Cebine elini koyarak rahat anlatım.</div>
+      </div></div>
+    </article>
+
+    <!-- D9 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D9</div>
+        <div class="head-text">
+          <div class="card-title">Niye ben bu işi seviyorum?</div>
+          <div class="meta"><span class="chip">Ilık + kişisel bağ</span><span class="chip time">55 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–4 sn</span></div><div class="box">"Bu işi niye seviyorum hiç düşünmediniz mi? Anlatayım."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">4–45 sn</span></div><div class="box"><p>"Yıllardır araba sektöründeyim. Galerici olabilirdim, başka iş yapabilirdim. Ama bu işi kurduktan sonra fark ettim — günümde en sevdiğim an müşteri satışı kapatıp 'çok rahatladım, sağ ol Çağatay' dediği an."</p><p>"Galericilerin yüzünde bu hiç olmuyor. Onlar müşteriyle pazarlık yaparken karşı taraflar. Satış olduğunda ya kazanmış olarak çıkıyor ya da fazla verdiğini düşünüyor. Müşteri de aynı."</p><p>"Ben farkı şurada görüyorum: ben müşterinin avukatı gibiyim. Onun tarafındayım. Satış olduğunda o kazandı, ben onunla beraber kazandım. Bu his çok farklı — kavga değil, paylaşım."</p><p>"Mehmet Bey'in araç satışı kapandığında elini sıktım, 'beni iyi gözlerle hatırla, bir gün benzer iş varsa yine ara' dedim. Bunu galerici diyemiyor."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">45–55 sn</span></div><div class="box">"Bu iş para değil mantığıyla başladı, sevgi mantığıyla devam ediyor. Profilden bana yaz."</div></div>
+        <div class="note">Çekim notu: Bu video kişisel, samimi. Sakin, yumuşak ton.</div>
+      </div></div>
+    </article>
+
+    <!-- D10 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D10</div>
+        <div class="head-text">
+          <div class="card-title">Pazarlık limitini önceden söylemenin püf noktası</div>
+          <div class="meta"><span class="chip">Soğuk + taktiksel</span><span class="chip time">40 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–3 sn</span></div><div class="box">"Pazarlığa hazırlanırken yapman gereken 1 zihinsel egzersiz var. Bunu yapmazsan kaybedersin."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">3–30 sn</span></div><div class="box"><p>"Aracını satmaya başlamadan önce kendi kendine cevapla: 'En düşük hangi fiyata satarım?'"</p><p>"Bu rakamı yaz, gözünün önünde tut. Pazarlık sırasında hiç değiştirme. Çünkü pazarlık esnasında duygusal kararlar veriyorsun — 'belki bu son şans, vereyim gitsin' falan."</p><p>"Önceden yazdığın rakam soğukkanlı kafanın kararı. Pazarlık sırasındaki kafan stresli. Önceden olan kararına güven."</p><p>"Bizim sözleşmemizde bu yazıyor — sözleşme imzalarken alıyoruz, sözleşmeye giriyor. Pazarlık zamanı geldiğinde duygulanma şansın yok. Limit yazılı, kayıt altında. Çok özgürleştirici aslında — kafadan hesap yapmıyorsun, yazılıya bakıyorsun."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">30–40 sn</span></div><div class="box">"Tek başına yapsan bile bu egzersizi yap. Aracı pahalıya satarsın."</div></div>
+        <div class="note">Çekim notu: Direkt, pratik. Defter+kalem b-roll iyi olur.</div>
+      </div></div>
+    </article>
+
+    <!-- D11 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D11</div>
+        <div class="head-text">
+          <div class="card-title">Tek başına satıyorum diyene sorduğum 1 soru</div>
+          <div class="meta"><span class="chip">Sıcak + objection handling</span><span class="chip time">45 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–3 sn</span></div><div class="box">"'Ben tek başına satarım' diyene 1 soru soruyorum. %80'i cevap veremiyor."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">3–35 sn</span></div><div class="box"><p>"Soru şu: 'Geçen 5 yılda tek başına kaç araç sattın?'"</p><p>"Cevaplar genelde iki tip oluyor:"</p><p>"Bir: 'Hiç satmadım, ilk defa.' Tamam, anladım — ilk seferde tüm hataları yapacaksın. Bizim modelimiz tam senin için."</p><p>"İki: '1-2 araç sattım yıllar önce.' Yani uzman değilsin. 2-3 ayda bir araç satıyorsun. Sürekli pazarlık halinde değilsin, sürekli alıcıyla muhatap olmuyorsun. Galerici her gün bu işi yapıyor — sen onun karşısında zayıfsın."</p><p>"Üç: 'Çok araç sattım.' Bu nadir cevap, bu adam galerici olabilir veya sektörel. Bu durumda zaten bize ihtiyacı yok, doğru."</p><p>"%80'imiz birinci veya ikinci gruptayız. Yani amatörüz. Amatör satışta para kaybediyoruz."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">35–45 sn</span></div><div class="box">"Amatör değil, profesyonelle çalış. arabavitrin.com."</div></div>
+        <div class="note">Çekim notu: İddialı ton ama saldırgan değil. Açık, dürüst.</div>
+      </div></div>
+    </article>
+
+    <!-- D12 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D12</div>
+        <div class="head-text">
+          <div class="card-title">Aracını satarken zamanın %80'ini ne ile harcıyorsun?</div>
+          <div class="meta"><span class="chip">Soğuk + farkındalık</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–4 sn</span></div><div class="box">"Aracını satmaya çalıştığın 1 ayda harcadığın zamanın %80'i bir tek şey ile geçiyor. Anlatayım."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">4–40 sn</span></div><div class="box"><p>"Düşün — son aracın satışında ne kadar zaman harcadın? Ortalama 60 saat diyelim, 1 ay yayılmış."</p><p>"Bu 60 saatin dağılımı: 5 saat ilan yazma, fotoğraf çekme. 5 saat ekspertiz, yıkama, hazırlık. 48 saat telefon, mesaj, görüşme — işte %80'i bu. 2 saat noter işlemi, satış kapanma."</p><p>"48 saat — yaklaşık 2 hafta toplam — sadece telefon trafiği. Ve bu 48 saatin de %90'ı boş trafik — galerici, takasçı, fiyat soran. Ciddi alıcıyla görüşme belki 5 saat."</p><p>"Şimdi düşün: aracını satarken o 48 saati kazanabilseydin ne yapardın? Ailene mi ayırırdın, işine mi ayırırdın? Hayatına mı?"</p><p>"Bizim modelimiz tam bu 48 saati senden alıyor. Sen 1 saat ofiste, 2 saat ekspertize, 1 saat noterde. Toplam 4 saat. Diğer 56 saat senin."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">40–50 sn</span></div><div class="box">"Vakit para. Hesap yap. arabavitrin.com."</div></div>
+        <div class="note">Çekim notu: Sayı ağırlıklı, görsel destek iyi olur (saatler animasyonlu).</div>
+      </div></div>
+    </article>
+
+    <!-- D13 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D13</div>
+        <div class="head-text">
+          <div class="card-title">Geçen ay bana gelen en ilginç sorular</div>
+          <div class="meta"><span class="chip">Ilık + samimi paylaşım</span><span class="chip time">55 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–4 sn</span></div><div class="box">"Geçen ay bana gelen 3 ilginç soru var, paylaşmak istedim. Belki seninkilerden de biri."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">4–45 sn</span></div><div class="box"><p>"Bir: 'Çağatay Bey, aracımı satarken eşim duymasın istiyorum, gizli olur mu?' Olmaz dedim. Ruhsat senin üstüne, noter işlemi resmi, KKB sorgusu yapılıyor. Aile içi sorun varsa önce onu çözmeniz lazım. Hem yasal, hem ahlaki olarak bizim yapmamız mümkün değil."</p><p>"İki: 'Aracımı oğluma satıyormuş gibi yapıp aslında galericiye versek, vergiyi ben mi yiyim oğlum mu?' Bu vergi dolandırıcılığı önerisi. Açıkça reddettim — biz bu işin içinde değiliz. Yine de adam ısrar etti, sözleşmesini imzalamadık."</p><p>"Üç: 'Boyalı aracımı orijinal boya diye satabilir misiniz?' Hayır. Şeffaflık prensibimiz var, kırmızı sticker konsepti var. Adam üzüldü, gitti. Hafta sonra başka galerici onu kandırmış, sonra zarar görmüş, geri geldi: 'Sen haklıymışsın.'"</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">45–55 sn</span></div><div class="box">"Bu sorular senin değilse harika. Olsaydı da çekinme, sor. Profilden yaz."</div></div>
+        <div class="note">Çekim notu: Hikaye anlatımı tonu — kahve içerken sohbet havası.</div>
+      </div></div>
+    </article>
+
+    <!-- D14 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D14</div>
+        <div class="head-text">
+          <div class="card-title">Aracın hangi fiyat seviyesinde alıcı sayısı patlar?</div>
+          <div class="meta"><span class="chip">Soğuk + fiyatlandırma</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–3 sn</span></div><div class="box">"Aracının fiyatını psikolojik eşiklere göre koy. 50 binlik fark, alıcı sayısını 3'e katlar."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">3–40 sn</span></div><div class="box"><p>"İnsan beyni rakamları kategoriye koyuyor. 1 milyon altı bir kategori, 1 milyon üstü başka kategori. 1 milyon 500 altı bir filtre, 1 milyon 500 üstü başka."</p><p>"Sahibinden'de filtre koyan adamın aklında 'maksimum 1 milyon 200 olsun' var. Sen 1 milyon 220'ye listeleyince adamın filtresi seni göstermiyor. 20 bin TL'yi kaybetmek için 80 binlik alıcı kitlesini kaybediyorsun."</p><p>"Doğrusu: psikolojik eşik altına gir. 1 milyon 200 yerine 1 milyon 195 koy. 1 milyon 500 yerine 1 milyon 495. Bu rakamlar filtre içinde kalıyor, alıcı sayın patlıyor."</p><p>"Sonra pazarlık aşamasında zaten 1 milyon 195'ten 1 milyon 175'e geliyorsun normalde. Eğer 1 milyon 220'ye listeleseydin filtrede gözükmedikçe alıcı bulamazdın."</p><p>"Bu pazarlamada en eski oyun ama araç satışında kimse aklına gelmiyor."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">40–50 sn</span></div><div class="box">"5 binlik fark, alıcı sayısı 3 kat. Hesap yap."</div></div>
+        <div class="note">Çekim notu: Sayı ağırlıklı, açık tahta veya kağıt iyi olur.</div>
+      </div></div>
+    </article>
+
+    <!-- D15 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D15</div>
+        <div class="head-text">
+          <div class="card-title">Çok soruluyor — 'sözleşmeden vazgeçemezmişim'</div>
+          <div class="meta"><span class="chip">Sıcak + objection handling</span><span class="chip time">45 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–4 sn</span></div><div class="box">"Bana en çok sorulan soru: 'Sözleşme imzalarsam bağlı kalır mıyım?' Cevap netleştireyim."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">4–35 sn</span></div><div class="box"><p>"Sözleşmemiz vazgeçilebilir. Her aşamada."</p><p>"Ofise geldin, sözleşmeyi imzaladın, paketi ödedin — eve gittin, eşinle konuştun, 'olmaz' dediniz. Beni ara, sözleşmeyi feshet. Paket bedel iade edilmez çünkü hizmet alındı (ekspertiz randevusu ayarlandı, fotoğrafçıyla anlaşıldı), ama başka bir borcun yok."</p><p>"İlanı yayınladık, 1 ay geçti, sen 'satıyorum vazgeçtim' dedin — yine sorunsuz. İlanı kaldırıyoruz, ilişki bitiyor."</p><p>"Aracını sözleşme süresinde başkasına sattın — yine sorunsuz. Senin aracın, sen kullanabilirsin. Sadece bizimle olan ilişkin biter."</p><p>"Tek koşul: bizden sattığın araç için anlaşılan komisyonu öde. Bu da satış olunca alınıyor — satış yoksa komisyon da yok."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">35–45 sn</span></div><div class="box">"Esir alımıyoruz. Karar her zaman sende. arabavitrin.com."</div></div>
+        <div class="note">Çekim notu: Güvence verme tonu. Sakin, açıklayıcı.</div>
+      </div></div>
+    </article>
+
+    <!-- D16 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D16</div>
+        <div class="head-text">
+          <div class="card-title">Aracın satıldıktan sonra ne yapıyoruz?</div>
+          <div class="meta"><span class="chip">Sıcak + süreç netleştirme</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–4 sn</span></div><div class="box">"Satış kapandıktan sonra biz ne yapıyoruz? Çoğu insan bilmiyor."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">4–40 sn</span></div><div class="box"><p>"Müşteri-alıcı arasında satış kapandı. Notere gidildi. Para satıcının hesabına geçti. Senin görevin bitti gibi geliyor değil mi? Hayır."</p><p>"Birinci iş: alıcı memnun mu? Onu arıyoruz, soruyoruz. 'Araç beklediğiniz gibi mi geldi, sorunsuz oldu mu?' Sorun varsa hemen müdahale ediyoruz. Çünkü mutsuz alıcı bizim itibarımıza zarar."</p><p>"İkinci iş: müşterimizin durumu nasıl? Satışın 1 hafta sonra mesaj atıyoruz. 'Sürecimizden memnun musunuz? Eksik kalan bir şey var mı?' Geri bildirim toplama."</p><p>"Üçüncü iş: faturalama. Hizmet bedeli için resmi fatura kesiyoruz. Müşteri vergi indiriminde kullanabilir, biz kayıt altına alıyoruz."</p><p>"Dördüncü iş: sosyal kanıt isteği. Eğer süreç güzel geçtiyse müşteriden Google yorum istiyoruz. Veya sosyal medya için kısa bir video röportaj. Gönüllü, baskı yok."</p><p>"Beşinci iş: sonraki ihtiyaç ortaya çıkar. 'Yeni araç almayı düşünüyor musunuz, ne almak istersiniz?' Bizim sayfada satılık var, ya da bilgi sahibi olduğumuz birkaç araç önerebiliriz."</p><p>"Yani satış başlangıç, son değil."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">40–50 sn</span></div><div class="box">"Bizimle iş bitmiyor, başlıyor. arabavitrin.com."</div></div>
+        <div class="note">Çekim notu: Detaylı süreç anlatımı. Profesyonellik gösterimi.</div>
+      </div></div>
+    </article>
+
+    <!-- D17 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D17</div>
+        <div class="head-text">
+          <div class="card-title">Aracı pahalıya satmak için yapılan en aptal şey</div>
+          <div class="meta"><span class="chip">Soğuk + viral potansiyel</span><span class="chip time">40 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–3 sn</span></div><div class="box">"Aracını pahalıya satmak için yapılan en aptal şey biliyor musun? Yapıyorsan dur."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">3–30 sn</span></div><div class="box"><p>"İnsanlar aracını sahibinden'e koyduklarında en pahalı ilanı buluyorlar ve onun 10 bin altına yazıyorlar. Mantık: 'En pahalı olmasın, biraz altta dursun.'"</p><p>"Sorun şu: o en pahalı ilan gerçek alıcı için fiyat değil. Genelde galerici 'şişirme' ilanı veya yanlış fiyatlandırılmış bir araç. Sen onun 10 bin altına yazınca aslında piyasanın çok üstündesin — alıcı senin ilanını görüp 'pahalı' deyip geçiyor."</p><p>"Doğru analiz: medyan fiyatı bul. En düşük + en yüksek arasındaki orta. Bu medyana 2-3 bin TL pazarlık marjı ekle, ilanını koy. Birkaç günde alıcı çıkar."</p><p>"Maksimum fiyatı baz almak = sahil kasabasının en pahalı evine bakıp ev fiyatı sandığın gibi. Yanlış referans."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">30–40 sn</span></div><div class="box">"Medyan al, maksimum değil. Takip et, başka tüyolar var."</div></div>
+        <div class="note">Çekim notu: Pratik, açık. Sayı örneği vurucu olur.</div>
+      </div></div>
+    </article>
+
+    <!-- D18 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D18</div>
+        <div class="head-text">
+          <div class="card-title">1 yıl içinde Antalya'da değiştirmek istediğim 3 şey</div>
+          <div class="meta"><span class="chip">Ilık + vizyon + bağ</span><span class="chip time">60 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–4 sn</span></div><div class="box">"1 yıl içinde Antalya araç sektöründe değiştirmek istediğim 3 şey var. Paylaşmak istedim."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">4–50 sn</span></div><div class="box"><p>"Bir: 'galerici dolandırdı' cümlesi tarihten silinsin. Yıllardır insanlar aracını sattıklarında pişmanlıkla çıkıyorlar. Bizim modelimiz yaygınlaşırsa, bu pişmanlık ortadan kalkacak. Galericiler de daha temiz çalışmaya geçecek."</p><p>"İki: şeffaflık standardı oturssun. Aracın boya durumu, hasar geçmişi, gerçek piyasa fiyatı — bunların hepsi alıcı için görünür olsun. Bizim kırmızı sticker konseptimiz, müşteri panelimiz — bu standartlar yayıldıkça sektör temizleniyor."</p><p>"Üç: satıcı kontrolü kazansın. Çoğu insan aracını satarken kendini muhtaç, savunmasız hissediyor. Galericiye gidip mütevazi bir ses tonuyla 'aracımı satar mısınız?' diye sorması bu hissin sonucu. Bizim modelimizde satıcı patron. Limitini söylüyor, kontrolü elinde tutuyor. Bu pozisyon değişimi tüm sektörü etkileyecek."</p><p>"Bu üç değişim sadece arabavitrin için değil, müşterinin hayatı için."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">50–60 sn</span></div><div class="box">"Bu vizyonla çalışıyorum. Sen de kazanırsan ben de kazanırım. arabavitrin.com."</div></div>
+        <div class="note">Çekim notu: Vizyoner ton. Çağatay abi liderlik konumunda. Bağ + sektörel otorite kuruyor.</div>
+      </div></div>
+    </article>
+
+    <!-- D19 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D19</div>
+        <div class="head-text">
+          <div class="card-title">Müşterimizin 1 yıl sonra başına gelenler</div>
+          <div class="meta"><span class="chip">Ilık + sosyal kanıt + bağ</span><span class="chip time">55 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–4 sn</span></div><div class="box">"Geçen yıl aracını sattırmış bir müşterim 1 yıl sonra geri geldi. Neden? Anlatayım."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">4–45 sn</span></div><div class="box"><p>"Mehmet Bey diyelim. Geçen Mayıs Volvo'sunu sattık. 18 günde, 1 milyon 380'e. Hizmet bedelimiz toplam 38 bin TL ödedi. Cebine 1 milyon 342 girdi."</p><p>"1 yıl sonra geçen hafta geldi. Yeni bir BMW almış, eskisi olarak verdiği takas fiyatı 1 milyon 800'müş. 'Çağatay,' dedi, 'bayide bana bu fiyatı verdiler ama tahminim 2 milyon 50-2 milyon 100 etmesi. Tekrar sizinle çalışmak istiyorum.'"</p><p>"Hesabımıza geldi. Aracı için sözleşme imzaladık. Şu an ilanda, 2 ay içinde satılır tahmin ediyorum. Bayideki 1 milyon 800'e versen 2 milyon 60'tan satarsan 260 bin daha kazanacak."</p><p>"Bunu niye anlatıyorum? Çünkü müşterilerimiz tek seferlik değil. Bir kere sistemi gördüğünde her araç değişiminde tekrar geliyorlar. Bu lifetime value dediğimiz şey — müşteri hayatı boyunca bizim olarak kalıyor. Galericinin bir kere kazandığı, biz onlarca kere kazanıyoruz, ama dürüstlükle."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">45–55 sn</span></div><div class="box">"Bizimle 1 araç sattığında ömür boyu ortaklığımız var. arabavitrin.com."</div></div>
+        <div class="note">Çekim notu: Hikaye anlatımı + iş modeli açıklaması karışımı. Samimi.</div>
+      </div></div>
+    </article>
+
+    <!-- D20 -->
+    <article class="card kamera">
+      <div class="card-head">
+        <div class="num">D20</div>
+        <div class="head-text">
+          <div class="card-title">Aracını satmaya hazır mısın? 3 soruyla test et</div>
+          <div class="meta"><span class="chip">Sıcak + harekete geçirme</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="seg hook"><div class="seg-label">Hook <span class="time">0–4 sn</span></div><div class="box">"Aracını satmaya gerçekten hazır mısın? 3 soruyla test et. Üçüne 'evet' diyorsan başla."</div></div>
+        <div class="seg"><div class="seg-label">Gövde <span class="time">4–40 sn</span></div><div class="box"><p>"Soru 1: Pazarlık limitin var mı? Yani 'en altta hangi rakama satarım'a cevabın net mi? Yoksa pazarlık sırasında yüzünün rengi atacak. Limit yazılı olmalı."</p><p>"Soru 2: Aracın evrakları hazır mı? Ruhsat fotokopisi, TRAMER sorgusu, vergi borcu durumu — bu 3'ü hazırsa süreç hızlı. Eksikse 2 hafta gecikir."</p><p>"Soru 3: Acelen var mı yok mu? Acelen varsa fiyat tavizi olabilir, hızlı satışa odaklanırız. Acelen yoksa fiyatı koruruz, 2-3 ay süre tanırız. İkisi farklı strateji — sen kararı söyle."</p><p>"Üçüne 'evet' diyebiliyorsan hazırsın. arabavitrin.com'a gel formu doldur. Bir tanesine bile cevabın yoksa endişe etme — bizimle birlikte çözeriz, ofiste oturup konuşalım."</p></div></div>
+        <div class="seg close"><div class="seg-label">Kapanış <span class="time">40–50 sn</span></div><div class="box">"Hadi başlayalım. arabavitrin.com, görüşürüz."</div></div>
+        <div class="note">Çekim notu: Net, çağırıcı. Çağatay abi bitiş cümlesinde gülümsesin.</div>
+      </div></div>
+    </article>
+  </div>
+
+  <footer>
+    <b>ArabaVitrin</b> · 40 video · Tam transkript seti
+  </footer>
+
+</div>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.group').forEach(g=>g.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('g-'+tab.dataset.t).classList.add('active');
+    window.scrollTo({top:document.querySelector('.tabs').offsetTop-10,behavior:'smooth'});
+  });
+});
+
+// Card expand/collapse
+document.querySelectorAll('.card-head').forEach(head=>{
+  head.addEventListener('click',()=>{
+    const card=head.parentElement;
+    const body=head.nextElementSibling;
+    const isOpen=card.classList.contains('open');
+    if(isOpen){
+      card.classList.remove('open');
+      body.style.maxHeight=null;
+    }else{
+      card.classList.add('open');
+      body.style.maxHeight=body.scrollHeight+'px';
+    }
+  });
+});
+</script>
+</body>
+</html>
