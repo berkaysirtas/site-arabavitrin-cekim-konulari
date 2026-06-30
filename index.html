@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArabaVitrin — Çekim Konuları</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B2D5B;
+  --navy-deep:#101d3d;
+  --coral:#D4431A;
+  --coral-soft:#f0e3dc;
+  --paper:#f6f5f2;
+  --card:#ffffff;
+  --line:#e4e2dd;
+  --ink:#1B2D5B;
+  --muted:#6b7280;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:560px;margin:0 auto;padding:0 18px 80px;}
+
+/* HEADER */
+header{
+  background:var(--navy);
+  color:#fff;
+  margin:0 -18px;
+  padding:42px 26px 34px;
+  position:relative;
+  overflow:hidden;
+}
+header::after{
+  content:"";
+  position:absolute;
+  right:-40px;top:-40px;
+  width:170px;height:170px;
+  border:14px solid var(--coral);
+  border-radius:50%;
+  opacity:.18;
+}
+.brand{
+  font-family:'Archivo',sans-serif;
+  font-weight:800;
+  font-size:13px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--coral);
+  margin-bottom:14px;
+}
+header h1{
+  font-family:'Archivo',sans-serif;
+  font-weight:800;
+  font-size:34px;
+  line-height:1.05;
+  letter-spacing:-.01em;
+}
+header p{
+  margin-top:14px;
+  font-size:15px;
+  color:#c7cfe2;
+  max-width:32ch;
+}
+.stat-row{
+  display:flex;
+  gap:10px;
+  margin-top:24px;
+}
+.stat{
+  flex:1;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;
+  padding:12px 10px;
+}
+.stat b{
+  font-family:'Archivo',sans-serif;
+  font-size:26px;
+  display:block;
+  line-height:1;
+}
+.stat span{
+  font-size:11px;
+  color:#aab4cf;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+/* TABS */
+.tabs{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  gap:8px;
+  background:var(--paper);
+  padding:14px 0 12px;
+  margin:0 0 6px;
+}
+.tab{
+  flex:1;
+  border:none;
+  font-family:'Archivo',sans-serif;
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:.02em;
+  padding:13px 8px;
+  border-radius:12px;
+  background:#fff;
+  color:var(--navy);
+  border:1.5px solid var(--line);
+  cursor:pointer;
+  transition:.18s;
+}
+.tab.active{
+  background:var(--navy);
+  color:#fff;
+  border-color:var(--navy);
+}
+.tab .dot{
+  display:inline-block;
+  width:7px;height:7px;
+  border-radius:50%;
+  margin-right:7px;
+  vertical-align:middle;
+}
+.tab[data-t="sicak"] .dot{background:var(--coral);}
+.tab[data-t="soguk"] .dot{background:#7b95c9;}
+
+/* SECTION LABEL */
+.sec-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:20px 2px 14px;
+}
+.sec-label .bar{
+  width:30px;height:3px;border-radius:3px;
+}
+.sec-label.soguk .bar{background:#7b95c9;}
+.sec-label.sicak .bar{background:var(--coral);}
+.sec-label h2{
+  font-family:'Archivo',sans-serif;
+  font-size:15px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.sec-label small{color:var(--muted);font-size:12px;font-weight:500;margin-left:auto;}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  margin-bottom:12px;
+  overflow:hidden;
+  transition:.18s;
+}
+.card.open{box-shadow:0 8px 26px -14px rgba(27,45,91,.4);}
+.card-head{
+  display:flex;
+  align-items:flex-start;
+  gap:13px;
+  padding:16px 16px;
+  cursor:pointer;
+}
+.num{
+  flex-shrink:0;
+  font-family:'Archivo',sans-serif;
+  font-weight:800;
+  font-size:13px;
+  width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:10px;
+  background:var(--navy);
+  color:#fff;
+  letter-spacing:.02em;
+}
+.card.sicak .num{background:var(--coral);}
+.head-text{flex:1;min-width:0;}
+.card-title{
+  font-family:'Archivo',sans-serif;
+  font-weight:700;
+  font-size:16.5px;
+  line-height:1.22;
+  color:var(--navy);
+}
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:9px;
+}
+.chip{
+  font-size:11px;
+  font-weight:600;
+  padding:4px 9px;
+  border-radius:20px;
+  background:#eef1f7;
+  color:var(--navy);
+  letter-spacing:.01em;
+}
+.chip.time{
+  background:var(--coral-soft);
+  color:var(--coral);
+}
+.chev{
+  flex-shrink:0;
+  width:22px;height:22px;
+  margin-top:8px;
+  color:var(--muted);
+  transition:transform .25s;
+}
+.card.open .chev{transform:rotate(180deg);}
+
+.body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .32s ease;
+}
+.body-inner{
+  padding:2px 16px 18px 67px;
+}
+.body-inner .lead{
+  font-size:13.5px;
+  font-style:italic;
+  color:var(--coral);
+  margin-bottom:12px;
+  padding-left:11px;
+  border-left:2.5px solid var(--coral);
+}
+.body-inner ul{list-style:none;}
+.body-inner li{
+  position:relative;
+  font-size:14px;
+  color:#374151;
+  padding:0 0 9px 18px;
+  line-height:1.5;
+}
+.body-inner li::before{
+  content:"";
+  position:absolute;
+  left:0;top:8px;
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--navy);
+}
+.card.sicak .body-inner li::before{background:var(--coral);}
+.note{
+  margin-top:12px;
+  font-size:12.5px;
+  background:#fff7ed;
+  border:1px solid #fcd9b8;
+  color:#9a3412;
+  padding:9px 12px;
+  border-radius:10px;
+  font-weight:500;
+}
+
+.group{display:none;}
+.group.active{display:block;}
+
+footer{
+  text-align:center;
+  margin-top:36px;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:12px;
+}
+footer b{color:var(--navy);font-family:'Archivo';letter-spacing:.04em;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">ArabaVitrin</div>
+    <h1>Çekeceğimiz<br>Konular</h1>
+    <p>DJI Osmo Pocket ile life-time tarzı çekim. Operasyonu, farkı ve süreci anlatan video seti.</p>
+    <div class="stat-row">
+      <div class="stat"><b>20</b><span>Video</span></div>
+      <div class="stat"><b>10</b><span>Soğuk</span></div>
+      <div class="stat"><b>10</b><span>Sıcak</span></div>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" data-t="soguk"><span class="dot"></span>Soğuk Evre</button>
+    <button class="tab" data-t="sicak"><span class="dot"></span>Sıcak Evre</button>
+  </div>
+
+  <!-- SOGUK -->
+  <div class="group active" id="g-soguk">
+    <div class="sec-label soguk">
+      <span class="bar"></span>
+      <h2>Operasyon Showcase</h2>
+      <small>Fark gösterimi</small>
+    </div>
+
+    <!-- S1 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S1</div>
+        <div class="head-text">
+          <div class="card-title">Müşteri ofise gelmeden ne yapıyorum?</div>
+          <div class="meta"><span class="chip">Behind-the-scenes</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"1 saat sonra müşterim geliyor. O gelmeden ne yapıyorum, bak."</div>
+        <ul>
+          <li>Sabah ofise giriş, kahve. Açılış repliği.</li>
+          <li>Sahibinden'de müşterinin aracı gibi 20 ilan inceleme. "Bu hazırlık olmadan fiyat söylenmez."</li>
+          <li>Not yazımı: ortalama fiyat, pazarlık marjı, sözleşme fiyatı.</li>
+          <li>Müşteri profili notu: form bilgileri, yaklaşım tarzı.</li>
+          <li>Kapanış: "Hazırlanmamış görüşme karambol olur. Biz öyle çalışmıyoruz."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- S2 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S2</div>
+        <div class="head-text">
+          <div class="card-title">Sözleşmemizi gösteriyorum — neyi imzalıyorsun?</div>
+          <div class="meta"><span class="chip">Document walkthrough</span><span class="chip time">70 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Hep soruyorlar — sözleşme ne diyor? Anlatayım, açıkça."</div>
+        <ul>
+          <li>Masada sözleşme açık, Osmo yukarıdan.</li>
+          <li>Madde madde gezme: araç senin üstüne, hizmet bedeli iki parça.</li>
+          <li>Pazarlık limiti maddesi: senin kararın, altına satış yok.</li>
+          <li>Alıcı yönetimi maddesi: her teklif onayına geliyor.</li>
+          <li>Fesih maddesi yakın çekim: "kullanılmamış kısım iade edilir."</li>
+          <li>Kapanış: "Saklamıyoruz. Profilden yaz, örneği gönderirim."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- S3 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S3</div>
+        <div class="head-text">
+          <div class="card-title">Ofise gelen müşteri 1 saat içinde ne yaşıyor?</div>
+          <div class="meta"><span class="chip">Timeline walkthrough</span><span class="chip time">80 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"1 saat içinde neler yaşayacak, adım adım."</div>
+        <ul>
+          <li>Ofis önü açılış, kapıdan giriş (Çağatay abi müşteri rolü).</li>
+          <li>Karşılama: çay, kahve, stres yok.</li>
+          <li>İlk 10-15 dk tanışma soruları.</li>
+          <li>Masada birlikte Sahibinden, fiyat birlikte çıkıyor.</li>
+          <li>Pazarlık limiti netleşmesi, sözleşme, POS'ta tahsilat.</li>
+          <li>Çıkış: WhatsApp randevu linki. "1 saat 10 dakika."</li>
+          <li>Kapanış: "1 hafta uğraşmak yerine 1 saat. Seçim senin."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- S4 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S4</div>
+        <div class="head-text">
+          <div class="card-title">Bir alıcı aradı, geri çevirdim — niye?</div>
+          <div class="meta"><span class="chip">Real moment</span><span class="chip time">45 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Az önce bir alıcı aradı, geri çevirdim. Anlatayım niye."</div>
+        <ul>
+          <li>Telefon yeni kapanmış, ofiste açılış.</li>
+          <li>Senaryo: araç 1.180, alıcı 800 teklif ediyor.</li>
+          <li>"Normal galerici 'gel görelim' der, baskı yapar."</li>
+          <li>Bizim cevabımız: "Alt limit 1.150, vakit kaybetmeyelim."</li>
+          <li>Kapanış: "Biz müşteriyi rahatsız tekliflerden koruyoruz. Koruma kalkanıyız."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- S5 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S5</div>
+        <div class="head-text">
+          <div class="card-title">Müşteri paneli — telefondan her şeyi gör</div>
+          <div class="meta"><span class="chip">Tech demo</span><span class="chip time">55 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Her müşterimize özel müşteri paneli. Bak ne gösteriyor."</div>
+        <ul>
+          <li>Telefon ekranı kayıt, CRM paneli açık.</li>
+          <li>Araç durumu: yayın günü, izlenme, favori, mesaj sayısı.</li>
+          <li>Mesaj ayrımı: galerici kırmızı, ciddi alıcı yeşil.</li>
+          <li>Haftalık WhatsApp raporu örneği.</li>
+          <li>Kapanış: "Sahibinden böyle panel veriyor mu? Biz veriyoruz."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- S6 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S6</div>
+        <div class="head-text">
+          <div class="card-title">Aracı stüdyoda nasıl çekiyoruz — şeffaflık</div>
+          <div class="meta"><span class="chip">Process documentary</span><span class="chip time">75 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Burası bizim stüdyo. Her hafta 3-4 araç buraya geliyor."</div>
+        <ul>
+          <li>Stüdyo girişi, ışıklar, dönen platform.</li>
+          <li>360 derece çekim mantığı: il dışı alıcı için.</li>
+          <li>Kırmızı sticker konsepti: çiziği saklamıyoruz, işaretliyoruz.</li>
+          <li>"Alıcı önceden biliyor, pazarlığı bitmiş."</li>
+          <li>Kapanış: "Sen yapmazsın. Biz standart yapıyoruz."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- S7 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S7</div>
+        <div class="head-text">
+          <div class="card-title">Anlaşmalı eksperdeyim — fiyat farkı niye yarısı?</div>
+          <div class="meta"><span class="chip">Field visit</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Müşterinin aracını getirdim ekspertize. Anlaşmalı yerimiz."</div>
+        <ul>
+          <li>Pilot Garaj girişi, Ahmet Hoca ile selamlaşma.</li>
+          <li>Fiyat farkı: bireysel 9 bin, biz 4 bin. Fark cebe giriyor.</li>
+          <li>Sebebi: aylık 25-30 araç volüm avantajı.</li>
+          <li>Aynı sistem fotoğrafçı ve yıkamada.</li>
+          <li>Kapanış: "Tek tek yaparsan zaman + para yiyor. Bizde standart."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- S8 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S8</div>
+        <div class="head-text">
+          <div class="card-title">Galericiler bana ne diyor? Sahnenin arkasından</div>
+          <div class="meta"><span class="chip">Insider perspective</span><span class="chip time">60 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Galerici dostlarım bana ne soruyor biliyor musun?"</div>
+        <ul>
+          <li>Ofiste, koltukta, gülerek açılış.</li>
+          <li>Murat'ın sorusu: "Bizi öldürüyor musun?"</li>
+          <li>Cevap: "Sen alıcı, ben satıcı tarafında. Tamamlayıcıyız."</li>
+          <li>Referans modeli: galerici müşteri yönlendiriyor, ödeme alıyor.</li>
+          <li>Kapanış: "Kavga değil, paylaşım ekonomisi. Kimseyi düşman görmüyoruz."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- S9 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S9</div>
+        <div class="head-text">
+          <div class="card-title">Bu hafta 12 form geldi — kaçı satışa döndü?</div>
+          <div class="meta"><span class="chip">Honest stats</span><span class="chip time">55 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"12 form geldi. Kaçı satışa döndü? Dürüst söyleyeceğim."</div>
+        <ul>
+          <li>Bilgisayar başında CRM açık, ekrana zoom.</li>
+          <li>Huni: 12 form → 8 dönüş → 5 ofise geldi → 4 sözleşme.</li>
+          <li>%33 dönüşüm, gerçek rakam.</li>
+          <li>"Galericiler '%100 satıyoruz' der ama düşük fiyatla."</li>
+          <li>Kapanış: "Şeffaf olmak böyle. Gerçek rakamları paylaşıyoruz."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- S10 -->
+    <article class="card soguk">
+      <div class="card-head">
+        <div class="num">S10</div>
+        <div class="head-text">
+          <div class="card-title">"Beklediğim fiyatı vermedin" dedi, ne yaptım?</div>
+          <div class="meta"><span class="chip">Real scenario</span><span class="chip time">60 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Geçen hafta zor bir görüşme oldu. Anlatayım."</div>
+        <ul>
+          <li>Senaryo: Audi A6, beklenti 2.200, gerçek 1.900-1.950.</li>
+          <li>"Yalan söyleyip listeleyebilirdim, 3 ay satılmazdı."</li>
+          <li>Dürüst cevap: "Fiyat piyasayı tutmuyor, sözleşme yapamayız."</li>
+          <li>Müşteri kızgın çıktı, hafta sonu geri aradı, 1.920 ile listeli.</li>
+          <li>Kapanış: "Dürüstlük kısa vadede kaybettirir, uzun vadede kazandırır."</li>
+        </ul>
+      </div></div>
+    </article>
+  </div>
+
+  <!-- SICAK -->
+  <div class="group" id="g-sicak">
+    <div class="sec-label sicak">
+      <span class="bar"></span>
+      <h2>Satışa Götüren</h2>
+      <small>Net CTA</small>
+    </div>
+
+    <!-- SI1 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ1</div>
+        <div class="head-text">
+          <div class="card-title">Aracını satmaya karar verdin? İlk 3 adım</div>
+          <div class="meta"><span class="chip">Action guide</span><span class="chip time">60 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"İlk 3 adımı söyleyeceğim. 5 dakikalık iş."</div>
+        <ul>
+          <li>Adım 1: arabavitrin'e gir, formu doldur (4 alan).</li>
+          <li>Telefon ekranında form gösterimi.</li>
+          <li>Adım 2: 10 dk içinde WhatsApp'tan yazılı + sesli dönüş.</li>
+          <li>Adım 3: ofise davet, 1 saat görüşme, taahhüt yok.</li>
+          <li>Kapanış: "Şu an aç, formu doldur. Seni bekliyorum."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- SI2 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ2</div>
+        <div class="head-text">
+          <div class="card-title">Hizmet bedelimiz tam olarak ne? Net hesap</div>
+          <div class="meta"><span class="chip">Transparent pricing</span><span class="chip time">65 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Hiçbir şey saklamadan hesaplayalım."</div>
+        <ul>
+          <li>Masada kağıt-kalem, kameraya hesap.</li>
+          <li>Paket bedel: 10.000 TL (ekspertiz + fotoğraf + yıkama).</li>
+          <li>Satış bedeli oranları kademeli yazımı.</li>
+          <li>Örnek hesap: 1.200'lük araç → toplam 34.000 TL.</li>
+          <li>Galerici karşılaştırması: gizli kayıp vs açık ödeme.</li>
+          <li>Kapanış: "Hesap net. Gel detaylı konuşalım."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- SI3 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ3</div>
+        <div class="head-text">
+          <div class="card-title">Aracını teslim etmiyorsun — sende kalıyor, niye?</div>
+          <div class="meta"><span class="chip">Differentiation</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Aracı size getirmiyor muyum? Hayır, getirmiyorsun."</div>
+        <ul>
+          <li>Otoparkta arabaların arasında yürüyerek çekim.</li>
+          <li>Galerici / konsinye farkı: bizde araç sende kalıyor.</li>
+          <li>Sadece 3 randevu: ekspertiz, yıkama, fotoğraf.</li>
+          <li>3 sebep: sorumluluk, günlük hayat, masraf sürprizi yok.</li>
+          <li>Kapanış: "Sat ama anahtarını teslim etme."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- SI4 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ4</div>
+        <div class="head-text">
+          <div class="card-title">Pazarlık limiti senin kararın — niye önemli?</div>
+          <div class="meta"><span class="chip">Control & power</span><span class="chip time">55 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"En altta hangi rakama satarız? Bu senin kararın."</div>
+        <ul>
+          <li>Ofiste masa başında açılış.</li>
+          <li>Limit sözleşmeye yazılıyor, altına satış yok.</li>
+          <li>Örnek: limit 1.130 ise, 1.100 teklif reddediliyor.</li>
+          <li>Galericide kontrol yok, bizde kontrol sende.</li>
+          <li>Kapanış: "Kontrolü kaybetme, satışı yine yap."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- SI5 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ5</div>
+        <div class="head-text">
+          <div class="card-title">Satış kapanmazsa ne oluyor? Tüm senaryolar</div>
+          <div class="meta"><span class="chip">What-if</span><span class="chip time">70 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"En kötü senaryoları konuşalım."</div>
+        <ul>
+          <li>Senaryo 1: 3 ay sattırmadı → birlikte yeniden değerlendirme.</li>
+          <li>Senaryo 2: vazgeçtin → fesih, komisyon sıfır.</li>
+          <li>Senaryo 3: acil satış → agresif fiyatlama.</li>
+          <li>Senaryo 4: tanıdığa direkt satış → fesih, sorun yok.</li>
+          <li>Kapanış: "Her senaryoda kontrol sende. Çıkışı kolay."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- SI6 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ6</div>
+        <div class="head-text">
+          <div class="card-title">İlk müşterimiz — 19 günde sattı, hikayesi</div>
+          <div class="meta"><span class="chip">Customer success</span><span class="chip time">90 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Mehmet Bey, ilk müşterilerimizden. 19 günde sattı."</div>
+        <ul>
+          <li>Ofiste, müşteri kahve içerken (yüz gösterme tercihine bağlı).</li>
+          <li>Müşteri kendi anlatıyor: önceki Sahibinden çilesi.</li>
+          <li>Süreç: 1 saat görüşme, sözleşme, 3 gün sonra vitrin.</li>
+          <li>Sonuç: 19. günde satış, net cebe giren para.</li>
+          <li>Kapanış: "Bu deneyim standart. Sıraya gir."</li>
+        </ul>
+        <div class="note">Not: İlk müşteri çıkana kadar bekle, çıktığında ilk hafta içinde çek.</div>
+      </div></div>
+    </article>
+
+    <!-- SI7 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ7</div>
+        <div class="head-text">
+          <div class="card-title">Şu 4 belge tamamsa anında satıyorum</div>
+          <div class="meta"><span class="chip">Quick checklist</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Bu 4 belgeyi hazır et, süreç 2 hafta hızlanır."</div>
+        <ul>
+          <li>Masada belgeler, tek tek gösterim.</li>
+          <li>1: Ruhsat fotokopisi.</li>
+          <li>2: TRAMER sorgusu (E-Devlet).</li>
+          <li>3: Vergi borcu sorgusu (E-Devlet).</li>
+          <li>4: Son ekspertiz raporu (15 günden yeniyse).</li>
+          <li>Kapanış: "Hazır mısın? Başla."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- SI8 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ8</div>
+        <div class="head-text">
+          <div class="card-title">Bugün 3 sözleşme imzalandı — kim, ne, niye</div>
+          <div class="meta"><span class="chip">Live update</span><span class="chip time">55 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Bugün 3 sözleşme imzaladık. Sırasıyla anlatayım."</div>
+        <ul>
+          <li>Ofiste, akşam saati açılış.</li>
+          <li>Sabah: Toyota Corolla, satış sebebi.</li>
+          <li>Öğlen: Mini Cooper Cabrio, satış sebebi.</li>
+          <li>Akşam: Range Rover Evoque, satış sebebi.</li>
+          <li>"Bu 3 araç bu hafta vitrine giriyor."</li>
+          <li>Kapanış: "Sen de bu müşterilerden biri olabilirsin. Geç kalma."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- SI9 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ9</div>
+        <div class="head-text">
+          <div class="card-title">Antalya dışındayım — yine çalışabilir misin?</div>
+          <div class="meta"><span class="chip">Expansion teaser</span><span class="chip time">50 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"İlk 100 form Antalya dışından geldi. Sürekli soruyorlar."</div>
+        <ul>
+          <li>Ofiste harita göstererek açılış.</li>
+          <li>Pilot dönem: şu an sadece Antalya, kalite kontrol için.</li>
+          <li>Genişleme planı: Muğla, Aydın, Burdur, Ege-Akdeniz.</li>
+          <li>İl dışı için 2 seçenek: güvenilir yönlendirme veya araç taşıma.</li>
+          <li>Kapanış: "İl dışıysan profilden yaz, çözüm bulalım."</li>
+        </ul>
+      </div></div>
+    </article>
+
+    <!-- SI10 -->
+    <article class="card sicak">
+      <div class="card-head">
+        <div class="num">Sİ10</div>
+        <div class="head-text">
+          <div class="card-title">Sözleşme imzalamadan önce 3 soru sor bana</div>
+          <div class="meta"><span class="chip">Confidence builder</span><span class="chip time">60 sn</span></div>
+        </div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="body"><div class="body-inner">
+        <div class="lead">"Cevabımı beğenmezsen imzalama, çık."</div>
+        <ul>
+          <li>Ofiste, koltukta, rahat açılış.</li>
+          <li>Soru 1: "Çıkmak istersem?" → cezaen ödeme yok.</li>
+          <li>Soru 2: "Başkasına satmak istersem?" → fesih, borç yok.</li>
+          <li>Soru 3: "Limitin altında satar mısınız?" → hayır, sözleşmede yazıyor.</li>
+          <li>Kapanış: "Soruları sor, kararı ver. Hadi başlayalım."</li>
+        </ul>
+      </div></div>
+    </article>
+  </div>
+
+  <footer>
+    <b>ArabaVitrin</b> · 20 video · DJI Osmo Pocket çekim seti
+  </footer>
+
+</div>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.group').forEach(g=>g.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('g-'+tab.dataset.t).classList.add('active');
+    window.scrollTo({top:document.querySelector('.tabs').offsetTop-10,behavior:'smooth'});
+  });
+});
+
+// Card expand/collapse
+document.querySelectorAll('.card-head').forEach(head=>{
+  head.addEventListener('click',()=>{
+    const card=head.parentElement;
+    const body=head.nextElementSibling;
+    const isOpen=card.classList.contains('open');
+    if(isOpen){
+      card.classList.remove('open');
+      body.style.maxHeight=null;
+    }else{
+      card.classList.add('open');
+      body.style.maxHeight=body.scrollHeight+'px';
+    }
+  });
+});
+</script>
+</body>
+</html>
